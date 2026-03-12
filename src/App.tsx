@@ -19,27 +19,41 @@ type TimelineItem = {
   title: string;
   subtitle: string;
   description: string;
-  visual: string;
+  visual:
+    | "office"
+    | "food-dual"
+    | "jersey-mikes"
+    | "camera-start"
+    | "detail-media"
+    | "dealership-lot"
+    | "reselling"
+    | "ecommerce"
+    | "digital-store"
+    | "studio-pm"
+    | "auto-sales"
+    | "graduation"
+    | "val-films"
+    | "agency"
+    | "college-next";
   accent: string;
 };
 
-function clamp(value: number, min: number, max: number) {
+type PanelConfig = {
+  icon: React.ReactNode;
+  kicker: string;
+  line1: string;
+  line2: string;
+  chips: string[];
+};
+
+function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
 }
 
 function VisualPanel({ item }: { item: TimelineItem }) {
   const iconProps = { size: 56, className: "visual-icon-svg" };
 
-  const configs: Record<
-    string,
-    {
-      icon: JSX.Element;
-      kicker: string;
-      line1: string;
-      line2: string;
-      chips: string[];
-    }
-  > = {
+  const configs: Record<TimelineItem["visual"], PanelConfig> = {
     office: {
       icon: <Building2 {...iconProps} />,
       kicker: "Aurora Home Care",
@@ -147,7 +161,7 @@ function VisualPanel({ item }: { item: TimelineItem }) {
     },
   };
 
-  const panel = configs[item.visual] || configs.office;
+  const panel = configs[item.visual];
 
   return (
     <div className={`visual-panel ${item.accent}`}>
@@ -170,7 +184,7 @@ function VisualPanel({ item }: { item: TimelineItem }) {
         </div>
 
         <div className="chip-row">
-          {panel.chips.map((chip) => (
+          {panel.chips.map((chip: string) => (
             <span key={chip} className="chip">
               {chip}
             </span>
@@ -338,7 +352,7 @@ export default function ValResumeSite() {
     []
   );
 
-  const [progress, setProgress] = useState(timeline.length - 1);
+  const [progress, setProgress] = useState<number>(timeline.length - 1);
   const total = timeline.length - 1;
   const currentIndex = Math.round(progress);
   const active = timeline[currentIndex];
@@ -396,13 +410,13 @@ export default function ValResumeSite() {
                 <div className="scrubber-box">
                   <div
                     className="scrubber-track-wrap"
-                    onPointerDown={(e) => {
+                    onPointerDown={(e: React.PointerEvent<HTMLDivElement>) => {
                       const rect = e.currentTarget.getBoundingClientRect();
                       const x = clamp(e.clientX - rect.left, 0, rect.width);
                       setProgress((x / rect.width) * total);
                       e.currentTarget.setPointerCapture?.(e.pointerId);
                     }}
-                    onPointerMove={(e) => {
+                    onPointerMove={(e: React.PointerEvent<HTMLDivElement>) => {
                       if (e.buttons !== 1) return;
                       const rect = e.currentTarget.getBoundingClientRect();
                       const x = clamp(e.clientX - rect.left, 0, rect.width);
