@@ -334,7 +334,7 @@ export default function ValResumeSite() {
         title: "Ignited Content",
         subtitle: "Founder",
         description:
-          "I built a marketing agency serving ceramic coating and tint shops. It started with social media management and evolved into paid ads and lead generation across Facebook, Instagram, and Google.",
+          "I run a paid advertising agency currently working with 10 local service-based businesses. I help seal coaters, tint shops, ceramic coating companies, roofing crews, tuckpointing companies, and other super-local trades generate leads and grow their revenue. Using Meta (Facebook & Instagram) and Google Ads, my clients typically add $10,000–$30,000 in additional monthly revenue through targeted lead generation campaigns.",
         visual: "agency",
         accent: "accent-agency",
       },
