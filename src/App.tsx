@@ -365,6 +365,11 @@ export default function ValResumeSite() {
           <div>
             <p className="eyebrow">Interactive Life Timeline</p>
             <h1 className="site-title">Val Igolkin</h1>
+          <p className="contact-info">
+            <a href="tel:+12679122601">+1 267-912-2601</a>
+            {" · "}
+            <a href="mailto:Val@IgnitedContent.co">Val@IgnitedContent.co</a>
+          </p>
           </div>
           <div className="topbar-meta">
             <p>{active.year}</p>
